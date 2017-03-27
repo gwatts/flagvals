@@ -21,3 +21,17 @@ func ExampleRangeInt() {
 	// default: 100
 	// set value: 123
 }
+
+func ExampleOneOfString() {
+	// Define a flag that accepts either "one" or "two"
+	flagval := NewOneOfString("one", "two")
+
+	flagset := flag.NewFlagSet("test-flags", flag.ContinueOnError)
+	flagset.Var(flagval, "test-flag", "usage here")
+
+	flagset.Parse([]string{"-test-flag", "one"})
+	fmt.Println("set value:", flagval.Value)
+
+	// Output:
+	// set value: one
+}

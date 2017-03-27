@@ -28,3 +28,20 @@ flag.Parse()
 fmt.Println("max size:", maxSize.Value)
 fmt.Println("concurrency:", concurrency.Value)
 ```
+
+# String choices
+
+OneOfString only accepts a string value that matches one of the choices
+configured for the flag.
+
+```golang
+// Define a flag that accepts either "one" or "two"
+system := NewOneOfString("production", "testing")
+
+flagset.Var(system, "test-flag", "usage here")
+
+flag.Parse()
+
+flagset.Parse([]string{"-test-flag", "production"})
+fmt.Println("set value:", system.Value)
+```
